@@ -1,0 +1,34 @@
+.orderlist_table {
+  line-height: 3.75rem;
+  thead {
+    line-height: 1.25rem;
+    background: #fafafa;
+    th:first-child {
+      border-radius: 0.5rem 0 0 0.5rem;
+    }
+    th:last-child {
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+  }
+}
+
+.detail {
+  background-color: $color--light;
+  border: 1px solid $color--gray4;
+  width: $width__btn--square;
+  height: $height__btn--meduim;
+  border-radius: $border-radius__btn;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardorder {
+  width: 80vw;
+  border-radius: $border-radius__btn;
+  box-shadow: $box-shadow__block;
+}
+
+.orderline {
+  border-top: solid #e0e0e0 2px;
+}

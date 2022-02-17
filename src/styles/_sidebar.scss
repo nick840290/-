@@ -1,0 +1,71 @@
+.c-member-sidebar {
+  position: sticky;
+  top: $top--sticky;
+}
+
+.Sidebaritems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.Sidebaritem {
+  margin-bottom: 1rem;
+  &:last-of-type {
+    margin: 1rem 0 0 0;
+  }
+  .Sidebarfont {
+    padding: 0.625rem;
+
+    display: flex;
+    align-items: center;
+
+    @include cursor(pointer);
+    &__icon {
+      color: $color--analogous1;
+      font-size: 1.25rem;
+
+      transition: $transition;
+    }
+    &__text {
+      margin-left: 1rem;
+      @include h5;
+      color: $color--analogous1;
+      font-size: 1.125rem;
+
+      transition: $transition;
+    }
+    &:hover {
+      .Sidebarfont__icon,
+      .Sidebarfont__text {
+        color: $color--hover;
+      }
+    }
+    &:focus,
+    &:active {
+      .Sidebarfont__icon,
+      .Sidebarfont__text {
+        color: $color--active;
+      }
+    }
+    &.active {
+      .Sidebarfont__icon,
+      .Sidebarfont__text {
+        color: $color--active;
+      }
+    }
+  }
+
+  .Sidebarfont {
+    justify-content: flex-start;
+    @media screen and (max-width: $lg) {
+      justify-content: center;
+    }
+  }
+}
+
+.Sidebarline {
+  margin: 1rem 0;
+  border-top: solid #e0e0e0 2px;
+}

@@ -6,118 +6,387 @@
 
 body {
   font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: 0.06em;
-  color: $color--font;
+  letter-spacing: $letter-spacing;
+  color: $color__font;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div {
+  cursor: default;
+}
+
+button {
+  letter-spacing: $letter-spacing;
 }
 
 @mixin heading {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: 0.06em;
+  letter-spacing: $letter-spacing;
   line-height: 110%;
-  color: $color--font;
+  color: $color__font;
 }
 
 @mixin text {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: 0.06em;
+  letter-spacing: $letter-spacing;
   line-height: 140%;
-  color: $color--font;
+  color: $color__font;
 }
 
 h1 {
   @include heading;
   font-weight: normal;
-  font-size: 60px;
+  font-size: 3.75rem;
 }
 
 h2 {
   @include heading;
   font-weight: normal;
-  font-size: 40px;
+  font-size: 2.5rem;
 }
 
 h3 {
   @include heading;
   font-weight: normal;
-  font-size: 32px;
+  font-size: 2rem;
 }
 
 h4 {
   @include heading;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 h5 {
   @include heading;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 h6 {
   @include heading;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1rem;
+}
+
+@mixin h1 {
+  @include heading;
+  font-weight: normal;
+  font-size: 3.75rem;
+}
+
+@mixin h2 {
+  @include heading;
+  font-weight: normal;
+  font-size: 2.5rem;
+}
+
+@mixin h3 {
+  @include heading;
+  font-weight: normal;
+  font-size: 2rem;
+}
+
+@mixin h4 {
+  @include heading;
+  font-weight: normal;
+  font-size: 1.5rem;
+}
+
+@mixin h5 {
+  @include heading;
+  font-weight: normal;
+  font-size: 1.25rem;
+}
+
+@mixin h6 {
+  @include heading;
+  font-weight: normal;
+  font-size: 1rem;
 }
 
 @mixin text--large {
   @include text;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 @mixin text--large-bold {
   @include text;
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
 @mixin text--medium {
   @include text;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 @mixin text--medium-bold {
   @include text;
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 1.125rem;
 }
 
 @mixin text--normal {
   @include text;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 @mixin text--normal-bold {
   @include text;
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 @mixin text--small {
   @include text;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 @mixin text--small-bold {
   @include text;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 0.875rem;
 }
 
 @mixin text--extra-small {
   @include text;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 @mixin text--extra-small-bold {
   @include text;
-  font-weight: bold;
-  font-size: 12px;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+@mixin interaction__link {
+  transition: $transition;
+  &:hover {
+    color: $color--hover;
+  }
+  &:focus,
+  &:active {
+    color: $color--active;
+  }
+}
+
+@mixin icon--absolute($content) {
+  content: $content;
+  width: max-content;
+  height: max-content;
+
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 1.5rem;
+
+  position: absolute;
+}
+
+@mixin cursor($cursor) {
+  cursor: pointer;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  div {
+    cursor: $cursor;
+  }
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color--gray5;
+    border-radius: 10rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color--primary;
+    border-radius: 10rem;
+    background-clip: content-box;
+  }
+}
+
+.c-form {
+  $_: &;
+  &__input {
+    height: $height__input;
+
+    border-radius: $border-radius__input;
+    @include text--small;
+    &::placeholder {
+      @include text--small;
+      color: $color--gray4;
+    }
+    &[type="number"] {
+      text-align: end;
+    }
+    &[type="checkbox"] {
+      transition: $transition;
+      &:focus {
+        border: $border__input;
+        box-shadow: none;
+      }
+      &:checked {
+        border: $border__input--checked;
+        background-color: $color--primary;
+      }
+    }
+    &:focus {
+      border: $border__input--focus;
+      box-shadow: none;
+    }
+  }
+  &__label {
+    margin-bottom: 0.5rem;
+    @include text--small;
+    color: $color--gray3;
+  }
+  &__select {
+    height: $height__input;
+
+    @include text--small;
+    border-radius: $border-radius__input;
+    background-image: url("../img/common/icon/down.svg");
+    &:focus {
+      border: $border__input--focus;
+      box-shadow: none;
+    }
+  }
+  &--disabled {
+    #{$_}__input {
+      color: $color--disabled;
+      border: $border__input--disabled;
+    }
+  }
+  &--error {
+    #{$_}__label {
+      color: $border__input--error;
+    }
+    #{$_}__input {
+      border: $border__input--error;
+    }
+  }
+  &--success {
+    #{$_}__input {
+      border: $border__input--success;
+    }
+  }
+}
+
+.c-checkbox {
+  margin-bottom: 1rem;
+
+  display: flex;
+  align-items: center;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  &__input {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0 0.5rem 0 0;
+
+    border-radius: $border-radius__input;
+    border: $border__input;
+  }
+}
+
+.e-btn {
+  width: max-content;
+  &--primary {
+    border: none;
+    background: $color--primary;
+    border-radius: $border-radius__btn;
+    color: $color--light;
+    box-shadow: $box-shadow__element;
+
+    transition: $transition;
+    &:hover {
+      background: $color--hover;
+    }
+    &:focus,
+    &:active {
+      background: $color--active;
+    }
+  }
+  &--w100 {
+    width: 100%;
+  }
+  &--large {
+    height: $height__btn--large;
+    @media screen and (max-width: $md) {
+      height: $height__btn--meduim;
+    }
+  }
+  &--medium {
+    height: $height__btn--meduim;
+  }
+  &--icon {
+    background: transparent;
+    border: none;
+  }
+  &--mobile {
+    @include cursor(pointer);
+    @media screen and (max-width: $md) {
+      width: $width__btn--square;
+      min-width: $width__btn--square;
+
+      background: $color--light;
+      color: $color--primary;
+      box-shadow: $box-shadow__block;
+      &:hover {
+        color: $color--light;
+      }
+      &:focus,
+      &:active {
+        color: $color--light;
+      }
+    }
+  }
+}
+
+.ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; //行數
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  overflow: hidden;
+  &--3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow: hidden;
+  }
 }

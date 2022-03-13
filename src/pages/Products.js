@@ -1,4 +1,5 @@
-import { React, useState } from 'react';
+/* P */
+import { React, useState, useEffect } from 'react';
 import { useLocation, useMatch } from 'react-router-dom';
 
 import Header from '../components/Header';
@@ -8,43 +9,53 @@ import ProductDetail from '../components/Products/ProductDetail';
 import FilterMobile from '../components/Products/FilterMobile';
 import FloatingIcon from '../components/FloatingIcon';
 import FloatingMenu from '../components/FloatingMenu';
+import FloatingChat from '../components/FloatingChat';
+import ScrollButton from '../components/ScrollButton';
+import PageBanner from '../components/PageBanner';
+
+import picBanner from '../img/page_banner/product.webp';
 
 function Products() {
+  /* 控制floatingMenu */
   const [isDisplay, setIsDisplay] = useState(false);
-  const [show, setShow] = useState({
-    in: false,
-    out: false,
+  const [category, setCategory] = useState({
+    id: '',
+    name: '',
   });
   const matchProduct = useMatch('/product');
   const matchProducts = useMatch('/product/:productId');
-  const isLower = () => {
-    if (matchProduct !== null || matchProducts !== null) {
-      return true;
-    }
-  };
+  const isLower = matchProduct !== null || matchProducts !== null;
+
   return (
     <>
-      <Header isLower={isLower} />
-      <div className="container">
-        <div className="row gx-lg-5">
-          <div className="col-3 d-none d-lg-block">
-            <Filter device="desktop" />
+      <div className={isLower ? 'u-padding--product-top' : ''}>
+        <PageBanner img={picBanner} />
+        <Header isLower={isLower} />
+        <div className="container">
+          <div className="row gx-lg-5">
+            <div className="col-lg-4 col-xl-3 d-none d-lg-block">
+              <Filter device="desktop" />
+            </div>
+            <div className="col-12 col-lg-8 col-xl-9">
+              <div className="l-product">
+                <ProductList category={category} setCategory={setCategory} />
+              </div>
+            </div>
           </div>
-          <div className="col-12 col-lg-9">
-            <ProductList show={show} setShow={setShow} />
-          </div>
+          <FloatingIcon setIsDisplay={setIsDisplay} page="product" />
+          {isDisplay && (
+            <FloatingMenu
+              isDisplay={isDisplay}
+              setIsDisplay={setIsDisplay}
+              page="product"
+            />
+          )}
         </div>
-        <FloatingIcon setIsDisplay={setIsDisplay} page="product" />
-        {isDisplay && (
-          <FloatingMenu
-            isDisplay={isDisplay}
-            setIsDisplay={setIsDisplay}
-            page="product"
-          />
-        )}
+        <FilterMobile />
+        <ProductDetail category={category} setCategory={setCategory} />
+        <FloatingChat />
+        <ScrollButton />
       </div>
-      <FilterMobile />
-      <ProductDetail show={show} setShow={setShow} />
     </>
   );
 }

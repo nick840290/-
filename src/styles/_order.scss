@@ -3,32 +3,80 @@
   thead {
     line-height: 1.25rem;
     background: #fafafa;
-    th:first-child {
-      border-radius: 0.5rem 0 0 0.5rem;
+    th {
+      padding: 1rem 0.5rem;
+      &:first-child {
+        border-radius: 0.5rem 0 0 0.5rem;
+      }
+      &:last-child {
+        border-radius: 0 0.5rem 0.5rem 0;
+      }
     }
-    th:last-child {
-      border-radius: 0 0.5rem 0.5rem 0;
-    }
+  }
+  td {
+    padding: 1rem 0.5rem;
   }
 }
 
-.detail {
-  background-color: $color--light;
-  border: 1px solid $color--gray4;
-  width: $width__btn--square;
-  height: $height__btn--meduim;
-  border-radius: $border-radius__btn;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .cardorder {
-  width: 80vw;
+  width: 100%;
   border-radius: $border-radius__btn;
   box-shadow: $box-shadow__block;
 }
 
 .orderline {
   border-top: solid #e0e0e0 2px;
+}
+
+.detailContent {
+  text-align: center;
+  vertical-align: middle !important;
+  line-height: 1.2rem;
+  &--name {
+    text-align: start;
+  }
+}
+
+.orderDetail {
+  width: 10rem;
+  height: 6.25rem;
+  object-fit: cover;
+}
+
+.order_td {
+  @include text--small;
+
+  &__order_id {
+  }
+
+  &__create_at {
+  }
+
+  &__payment_status {
+    color: $color--info;
+  }
+
+  &__order_status {
+    color: $color--error;
+  }
+
+  &__total {
+    color: $color--secondary;
+  }
+}
+
+.c-order-detail {
+  &__content {
+    margin-bottom: 1.5rem;
+  }
+  &__heading {
+    margin-bottom: 1rem;
+    @include text--normal;
+    color: $color--gray3;
+  }
+  &__text {
+    margin-left: 0.5rem;
+    @include text--normal;
+    color: $color--font;
+  }
 }

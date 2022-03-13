@@ -1,7 +1,9 @@
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Products from '../pages/Products';
+// import ProductDetail from '../components/Products/ProductDetail';
+import Sort from '../components/Products/Sort';
 import Member from '../pages/Member';
 import Fav from '../pages/Fav';
 import Cart from '../pages/Cart';
@@ -12,10 +14,12 @@ import Calculator from '../pages/Calculator';
 import Blog from '../pages/Blog';
 import NotFound from '../pages/NotFound';
 import Signup from '../pages/Signup';
-import Login from '../pages/Login';
 import ResetPassword from '../pages/ResetPassword';
 
 import BlogArticle from '../components/Blog/BlogArticle';
+
+import AdminChat from '../pages/AdminChat';
+import DietLog from '../pages/DietLog';
 
 import imgFood from '../img/common/illustration/food.svg';
 
@@ -38,6 +42,7 @@ const routerList = [
         breadcrumbName: '商品列表',
         header: '健康餐盒',
         headerImg: imgFood,
+        layout: <Sort />,
       },
       {
         path: `:productId`,
@@ -45,6 +50,7 @@ const routerList = [
         breadcrumbName: '商品細節',
         header: '健康餐盒',
         headerImg: imgFood,
+        layout: <Sort />,
       },
     ],
   },
@@ -83,7 +89,7 @@ const routerList = [
         headerImg: imgFood,
       },
       {
-        path: `coupon`,
+        path: `coupon/*`,
         element: <Coupon />,
         breadcrumbName: '優惠券',
         header: '優惠券',
@@ -130,23 +136,32 @@ const routerList = [
         headerImg: imgFood,
       },
       {
-        path: `article`,
+        path: `:blogId`,
         element: <BlogArticle />,
-        breadcrumbName: '健康新知',
       },
     ],
   },
-  // {
-  //   path: `signup`,
-  //   element: <Login />,
-  // },
   {
     path: `login`,
     element: <Signup />,
   },
   {
-    path: `resetpassword`,
+    path: `/reset/:resetString`,
     element: <ResetPassword />,
+  },
+  {
+    path: `admin`,
+    element: <AdminChat />,
+    breadcrumbName: '客服系統',
+    header: '客服系統',
+    headerImg: imgFood,
+  },
+  {
+    path: `dietlog`,
+    element: <DietLog />,
+    breadcrumbName: '飲食日誌',
+    header: '飲食日誌',
+    headerImg: imgFood,
   },
   {
     path: '*',

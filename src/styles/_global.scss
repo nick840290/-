@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Style+Script&display=swap");
 
 * {
   box-sizing: border-box;
@@ -36,6 +37,21 @@ button {
   letter-spacing: $letter-spacing;
 }
 
+[list]::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+@for $i from 1 through 6 {
+  $zIndexBackdrop: #{1055 + (5 * $i)};
+  $zIndexContent: #{1055 + (5 * $i) + 2};
+  .modal-backdrop.show:nth-of-type(#{$i}) {
+    z-index: $zIndexBackdrop;
+  }
+  div[role="dialog"][aria-modal="true"]:nth-of-type(#{$i}) {
+    z-index: $zIndexContent;
+  }
+}
+
 @mixin heading {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
@@ -54,73 +70,73 @@ button {
 
 h1 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 3.75rem;
 }
 
 h2 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 2.5rem;
 }
 
 h3 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 2rem;
 }
 
 h4 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1.5rem;
 }
 
 h5 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1.25rem;
 }
 
 h6 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1rem;
 }
 
 @mixin h1 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 3.75rem;
 }
 
 @mixin h2 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 2.5rem;
 }
 
 @mixin h3 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 2rem;
 }
 
 @mixin h4 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1.5rem;
 }
 
 @mixin h5 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1.25rem;
 }
 
 @mixin h6 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1rem;
 }
 
@@ -184,14 +200,69 @@ h6 {
   font-size: 0.75rem;
 }
 
+@mixin clear__btn {
+  background: transparent;
+  border: none;
+
+  @include cursor(pointer);
+}
+
 @mixin interaction__link {
   transition: $transition;
+
   &:hover {
     color: $color--hover;
   }
+
   &:focus,
   &:active {
     color: $color--active;
+  }
+}
+
+@mixin interaction__btn {
+  transition: $transition;
+
+  &:hover {
+    color: $color--light;
+    background: $color--hover;
+
+    i {
+      color: $color--light;
+    }
+  }
+
+  &:focus,
+  &:active {
+    color: $color--light;
+    background: $color--active;
+
+    i {
+      color: $color--light;
+    }
+  }
+}
+
+@mixin interaction__tab {
+  transition: $transition;
+
+  &:hover {
+    color: $color--primary;
+    background: $color--opacity;
+
+    i {
+      color: $color--primary;
+    }
+  }
+
+  &:focus,
+  &:active {
+    color: $color--primary;
+    background: $color--opacity;
+
+    i {
+      color: $color--primary;
+    }
   }
 }
 
@@ -209,6 +280,7 @@ h6 {
 
 @mixin cursor($cursor) {
   cursor: pointer;
+
   h1,
   h2,
   h3,
@@ -217,7 +289,9 @@ h6 {
   h6,
   p,
   span,
-  div {
+  div,
+  label,
+  input {
     cursor: $cursor;
   }
 }
@@ -226,77 +300,262 @@ h6 {
   &::-webkit-scrollbar {
     width: 0.25rem;
   }
+
   &::-webkit-scrollbar-track {
     background: $color--gray5;
     border-radius: 10rem;
   }
+
   &::-webkit-scrollbar-thumb {
     background: $color--primary;
     border-radius: 10rem;
     background-clip: content-box;
+    transition: $transition;
+    &:hover {
+      background: $color--hover;
+    }
+  }
+}
+
+@mixin scrollbar--hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin placeholder__rec($margin) {
+  width: 100%;
+  margin: $margin;
+  border-radius: $border-radius__btn;
+}
+
+@mixin placeholder__text {
+  width: 100%;
+  height: 1.5rem;
+}
+
+@mixin text--truncate($line) {
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+}
+
+@mixin clear__number-arrow {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+.c-alert {
+  &__overlay {
+    background: $color--modal-bg !important;
+  }
+  &__modal {
+    background-color: $color--light !important;
+    border: none !important;
+    border-radius: $border-radius__block !important;
+    box-shadow: $box-shadow__modal !important;
+  }
+  &__title {
+    color: $color__font !important;
+    font-weight: 500 !important;
+    font-size: 1.25rem !important;
+  }
+  &__text {
+    color: $color__font !important;
+    font-weight: normal !important;
+    font-size: 1rem !important;
+  }
+  &__toast {
+    background-color: $color--light !important;
+    border: none !important;
+    border-radius: $border-radius__btn !important;
+    box-shadow: $box-shadow__modal !important;
+  }
+  &__subtitle {
+    color: $color__font !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
   }
 }
 
 .c-form {
   $_: &;
+
   &__input {
     height: $height__input;
 
+    border: $border__input;
     border-radius: $border-radius__input;
     @include text--small;
+
     &::placeholder {
       @include text--small;
       color: $color--gray4;
     }
+
     &[type="number"] {
       text-align: end;
     }
+
     &[type="checkbox"] {
       transition: $transition;
+
       &:focus {
         border: $border__input;
         box-shadow: none;
       }
+
       &:checked {
         border: $border__input--checked;
         background-color: $color--primary;
       }
     }
-    &:focus {
+
+    &:focus,
+    &:focus-visible {
       border: $border__input--focus;
       box-shadow: none;
     }
+
+    &--textarea {
+      min-height: $height__input;
+      padding: 0.7rem;
+      resize: none;
+    }
+
+    &[type="file"] {
+      width: 100%;
+      padding: 0.75rem 0 0.75rem 2.5rem;
+
+      @include cursor(pointer);
+
+      position: relative;
+
+      &::-webkit-file-upload-button {
+        display: none;
+      }
+
+      &::after {
+        @include icon--absolute("\2b");
+        color: $color--gray4;
+
+        top: 45%;
+        left: 0.75rem;
+        transform: translateY(-50%);
+      }
+    }
+
+    &:-webkit-autofill {
+      border: $border__input;
+      -webkit-box-shadow: -100px 0 0 100px transparent inset;
+      -webkit-text-fill-color: $color--font;
+      transition: background-color 5000s ease-in-out 0s;
+
+      &:hover,
+      &:focus,
+      &:active {
+        border: $border__input;
+        -webkit-box-shadow: -100px 0 0 100px transparent inset;
+        -webkit-text-fill-color: $color--font;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+    }
+
+    &:disabled {
+      background: transparent;
+      opacity: 0.6;
+    }
   }
+
   &__label {
     margin-bottom: 0.5rem;
     @include text--small;
     color: $color--gray3;
   }
+
   &__select {
     height: $height__input;
 
     @include text--small;
+    border: $border__input;
     border-radius: $border-radius__input;
     background-image: url("../img/common/icon/down.svg");
+
+    @include cursor(pointer);
+
     &:focus {
       border: $border__input--focus;
       box-shadow: none;
     }
   }
+
+  // &__file {
+  //   width: $height__input--file;
+  //   height: $height__input--file;
+
+  //   @include clear__btn;
+  //   border-radius: $border-radius__input;
+  //   border: $border__input;
+
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+
+  //   position: relative;
+  //   span {
+  //   }
+  //   &::after {
+  //     @include icon--absolute("\2b");
+  //     color: $color--gray4;
+
+  //     top: 45%;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%);
+  //   }
+  //   &::-webkit-file-upload-button {
+  //     width: $height__input--file;
+  //     height: $height__input--file;
+  //     padding: 0;
+  //     margin: 0;
+
+  //     @include clear__btn;
+  //     opacity: 0;
+
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+
+  //     @include cursor(pointer);
+  //   }
+  // }
   &--disabled {
     #{$_}__input {
       color: $color--disabled;
       border: $border__input--disabled;
     }
   }
+
   &--error {
     #{$_}__label {
       color: $border__input--error;
     }
+
     #{$_}__input {
       border: $border__input--error;
     }
   }
+
   &--success {
     #{$_}__input {
       border: $border__input--success;
@@ -309,9 +568,13 @@ h6 {
 
   display: flex;
   align-items: center;
+
+  @include cursor(pointer);
+
   &:last-of-type {
     margin-bottom: 0;
   }
+
   &__input {
     width: 1.5rem;
     height: 1.5rem;
@@ -324,6 +587,22 @@ h6 {
 
 .e-btn {
   width: max-content;
+  padding: 0 1.25rem;
+
+  @include text--normal;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:disabled {
+    opacity: 0.5;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
   &--primary {
     border: none;
     background: $color--primary;
@@ -332,32 +611,138 @@ h6 {
     box-shadow: $box-shadow__element;
 
     transition: $transition;
+
     &:hover {
+      color: $color--light;
       background: $color--hover;
+      box-shadow: none;
     }
+
     &:focus,
     &:active {
+      color: $color--light;
       background: $color--active;
+      box-shadow: none;
     }
   }
+
+  &--light {
+    border: none;
+    background: $color--light;
+    border-radius: $border-radius__btn;
+    color: $color--primary;
+    box-shadow: $box-shadow__element;
+
+    transition: $transition;
+
+    &:hover {
+      color: $color--light;
+      background: $color--hover;
+      box-shadow: none;
+    }
+
+    &:focus,
+    &:active {
+      color: $color--light;
+      background: $color--active;
+      box-shadow: none;
+    }
+  }
+
+  &--plain {
+    border: none;
+    background: $color--primary;
+    border-radius: $border-radius__input;
+    color: $color--light;
+
+    transition: $transition;
+
+    &:not([disabled]) {
+      &:hover {
+        color: $color--light;
+        background: $color--hover;
+        box-shadow: none;
+      }
+    }
+
+    &:hover {
+      color: $color--light;
+      background: $color--hover;
+      box-shadow: none;
+    }
+
+    &:focus,
+    &:active {
+      color: $color--light;
+      background: $color--active;
+      box-shadow: none;
+    }
+
+    &.active {
+      background: $color--primary;
+      color: $color--light;
+    }
+  }
+
+  &--cancel {
+    border: none;
+    background: $color--gray5;
+    border-radius: $border-radius__input;
+
+    transition: $transition;
+
+    &:not([disabled]) {
+      &:hover {
+        color: $color--light;
+        background: $color--hover;
+        box-shadow: none;
+      }
+    }
+
+    &:hover {
+      color: $color--light;
+      background: $color--hover;
+      box-shadow: none;
+    }
+
+    &:focus,
+    &:active {
+      color: $color--light;
+      background: $color--active;
+      box-shadow: none;
+    }
+  }
+
   &--w100 {
     width: 100%;
   }
+
   &--large {
     height: $height__btn--large;
+
     @media screen and (max-width: $md) {
       height: $height__btn--meduim;
     }
   }
+
   &--medium {
     height: $height__btn--meduim;
   }
+
   &--icon {
+    width: $size__icon-btn;
+    height: $size__icon-btn;
+    padding: 0;
+
     background: transparent;
     border: none;
+    border-radius: $border-radius__btn;
+    @include interaction__tab;
   }
+
   &--mobile {
     @include cursor(pointer);
+
     @media screen and (max-width: $md) {
       width: $width__btn--square;
       min-width: $width__btn--square;
@@ -365,13 +750,35 @@ h6 {
       background: $color--light;
       color: $color--primary;
       box-shadow: $box-shadow__block;
+
       &:hover {
         color: $color--light;
       }
+
       &:focus,
       &:active {
         color: $color--light;
       }
+    }
+  }
+
+  &--secondary {
+    @include text--normal;
+    background: $color--gray6;
+  }
+
+  &--outline {
+    border: $border__input;
+    border-radius: $border-radius__input;
+    @include interaction__tab;
+  }
+  &--none {
+    &:hover {
+      background: transparent;
+    }
+    &:focus,
+    &:active {
+      background: transparent;
     }
   }
 }
@@ -382,11 +789,179 @@ h6 {
   -webkit-box-orient: vertical;
   white-space: normal;
   overflow: hidden;
+
   &--3 {
     display: -webkit-box;
     -webkit-line-clamp: 3; //行數
     -webkit-box-orient: vertical;
     white-space: normal;
     overflow: hidden;
+  }
+}
+
+.e-img {
+  &--cover {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+
+  &--contain {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+  }
+}
+
+.c-tabs {
+  display: flex;
+
+  &__btn {
+    padding: 0.625rem 1.25rem;
+    @include clear__btn;
+    @include text--normal-bold;
+    color: $color--gray4;
+
+    border-radius: $border-radius__tabs;
+
+    transition: $transition;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 0;
+      height: 0.125rem;
+
+      background: $color--primary;
+
+      position: absolute;
+      top: 100%;
+      left: 50%;
+
+      opacity: 0;
+      transition: $transition;
+      transform: translateX(-50%);
+    }
+
+    &:hover {
+      color: $color--primary;
+      background: $color--opacity;
+    }
+
+    &.active {
+      color: $color--primary;
+
+      &::after {
+        content: "";
+        width: 100%;
+        height: 0.125rem;
+
+        position: absolute;
+        top: 100%;
+        left: 50%;
+
+        opacity: 1;
+        transform: translateX(-50%);
+      }
+    }
+
+    &--w100 {
+      width: 100%;
+    }
+  }
+}
+
+.c-modal {
+  &__backdrop {
+    background-color: $color--modal-bg;
+  }
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    padding: $padding__modal;
+
+    background: $color--light;
+    border: none;
+    box-shadow: $box-shadow__modal;
+    border-radius: $border-radius__modal;
+
+    @include scrollbar;
+    overflow-y: auto;
+
+    &--full-page {
+      @media screen and (min-width: $md) and (max-width: $lg) {
+        padding: $padding__modal--md;
+      }
+    }
+    &--modal {
+      @media screen and (max-width: $md) {
+        width: 95%;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  &__close {
+    position: fixed;
+    top: 0.5rem;
+    right: 0.5rem;
+
+    @media screen and (min-width: $md) {
+      display: none;
+    }
+  }
+}
+
+.c-loading {
+  width: 100vw;
+  height: 100vh;
+
+  background: $color--primary;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1200;
+
+  &__icon {
+    width: 40%;
+    height: 40%;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    @media screen and (max-width: $md) {
+      width: 50%;
+      height: 50%;
+    }
+    @media screen and (max-width: $sm) {
+      width: 60%;
+      height: 60%;
+    }
+  }
+}
+
+.c-placeholder {
+  &__img {
+    width: 25rem;
+    height: 20rem;
+    margin: 0 auto;
+    // &--not-found {
+    //   background: $color--primary;
+    //   -webkit-mask: $img__not-found no-repeat center;
+    //   mask: $img__not-found no-repeat center;
+    // }
+  }
+  &__action {
+    animation: wobble 4s both infinite;
   }
 }

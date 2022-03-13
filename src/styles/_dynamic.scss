@@ -1,7 +1,32 @@
-.u-padding {
-  &__product-top {
-    @media screen and (max-width: $lg) {
-      padding-top: $height__floating-filter-body + 2.5rem;
+.u {
+  &-margin {
+    &--page-bottom {
+      margin-bottom: 3.75rem;
+    }
+  }
+  &-height {
+    &--empty-page {
+      height: max-content;
+      min-height: calc(100vh - $height__navbar - 15.375rem);
+    }
+    &--page {
+      height: max-content;
+      min-height: calc(100vh - $height__navbar - 15.375rem);
+    }
+    &--full-page {
+      height: max-content;
+      min-height: calc(100vh - $height__navbar);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  &-padding {
+    &--product-top {
+      @media screen and (max-width: $lg) {
+        padding-top: $height__floating-filter-body - 1.5rem;
+      }
     }
   }
 }

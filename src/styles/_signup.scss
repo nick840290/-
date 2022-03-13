@@ -1,5 +1,6 @@
 .error {
-    color: red;
+    @include text--small;
+    color: $color--error;
     margin-top: 0.5rem;
     text-align: center;
 }
@@ -85,11 +86,12 @@
                     background-color: transparent;
                     border-radius: 0;
                     box-shadow: none;
+                    border-bottom-color: $color--active;
                 }
 
                 .signup-form_label {
                     color: $color--gray4;
-                    padding: .5rem 0 0 4rem;
+                    padding: 0.5rem 0 0 4rem;
                     margin-bottom: 0.5rem;
                     color: $color__font;
                     width: 100%;
@@ -129,7 +131,7 @@
 }
 
 .signup-page::before {
-    content: '';
+    content: "";
     width: 100%;
     height: 100px;
     background: linear-gradient(to bottom, white, transparent);
@@ -140,7 +142,7 @@
 }
 
 .signup-page::after {
-    content: '';
+    content: "";
     width: 100%;
     height: 100px;
     background: linear-gradient(to bottom, transparent, white);
@@ -172,11 +174,36 @@
         padding: 1.5rem 0 1.5rem 0;
         margin-top: 1rem;
         text-align: center;
-        font-size: 1.25rem;
+        font-size: 1rem;
 
         .another-login_title {
-            background-color: $color--light;
             color: $color--gray3;
+
+            position: relative;
+
+            &::before {
+                content: "";
+                width: 2rem;
+                height: $height__line;
+                background: $color--gray4;
+
+                position: absolute;
+                top: 50%;
+                left: -3rem;
+                transform: translateY(-50%);
+            }
+
+            &::after {
+                content: "";
+                width: 2rem;
+                height: $height__line;
+                background: $color--gray4;
+
+                position: absolute;
+                top: 50%;
+                right: -3rem;
+                transform: translateY(-50%);
+            }
         }
     }
 
@@ -189,50 +216,29 @@
             box-shadow: none;
         }
 
-        .another-login_button {
-            background-color: $color--light;
-            padding: 0.5rem 1rem;
-            font-size: 2rem;
-            line-height: 1.5;
-            border: 1px solid $color--active;
-            border-radius: 0.25rem;
+        button {
+            border-radius: 0.625rem !important;
         }
 
-        .google {
-            color: $color--info;
-
-            :hover {
-                color: $color--info;
-            }
-        }
-
-
-        .line {
-            color: #00B900;
-
-            :hover {
-                color: #00B900;
-            }
-        }
-
-        .facebook {
-            color: #3b5998;
-
-            :hover {
-                color: #3b5998;
-            }
-
+        .kep-login-facebook {
+            text-transform: capitalize;
+            box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px, rgb(0 0 0 / 24%) 0px 0px;
         }
     }
-
 }
 
 /** Modal **/
 .modal-wrapper {
-    padding: 2rem;
-
+    width: 80%;
+    margin: 0 auto;
+    @media screen and (max-width: $md) {
+        width: 100%;
+    }
     .modal_close-button {
         cursor: pointer;
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
     }
 
     .modal-title {
@@ -241,26 +247,24 @@
     }
 
     .modal-statement {
-        padding: 1rem 6rem;
         margin: 0 auto;
         text-align: center;
         line-height: 1.5;
     }
 
     .modal-form {
-
         .modal_form-label {
-            font-size: .8rem;
-            margin: .5rem 0;
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
         }
 
         .modal_form-Input {
-            padding: .5rem;
+            padding: 0.5rem;
         }
     }
 
     .modal_submit-button {
-        padding: .5rem 0;
+        padding: 0.5rem 0;
         margin-top: 1rem;
         background-color: $color--success;
         border-color: transparent;
@@ -270,6 +274,11 @@
         border: 1px solid transparent;
         border-radius: 0.25rem;
     }
+}
+
+/*** Alert Button***/
+.swal2-styled.swal2-confirm {
+    background-color: $color--primary !important;
 }
 
 /*** Tablet Mode ***/
@@ -290,17 +299,7 @@
         width: 80%;
 
         .another-login_title-wrapper {
-            font-size: 1rem;
-        }
-
-        .another-login_buttons {
-
-            .google,
-            .facebook,
-            .line {
-                padding: .3rem .8rem;
-                font-size: 1.5rem;
-            }
+            font-size: 0.9rem;
         }
     }
 }
@@ -325,16 +324,13 @@
             height: 100%;
 
             .signup-form {
-
                 .form-floating {
-
                     .fa-envelope,
                     .fa-lock {
                         left: 5%;
                     }
                 }
             }
-
         }
     }
 
@@ -344,25 +340,14 @@
         .another-login_title-wrapper {
             font-size: 1rem;
         }
-
-        .another-login_buttons {
-
-            .google,
-            .facebook,
-            .line {
-                padding: .2rem .5rem;
-            }
-        }
     }
 }
 
 @media screen and (max-width: 425px) {
     .signup-page {
         .signup-form-wrapper {
-
             .signup-form {
                 .form-floating {
-
                     .fa-envelope,
                     .fa-lock {
                         left: 10%;
@@ -373,17 +358,8 @@
     }
 
     .another-login {
-
-
         .another-login_title-wrapper {
-            font-size: .8rem;
-        }
-
-    }
-
-    .modal-wrapper {
-        .modal-statement {
-            padding: 1rem 2rem;
+            font-size: 0.8rem;
         }
     }
 }

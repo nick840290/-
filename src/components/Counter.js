@@ -1,10 +1,10 @@
 import { React, useState } from 'react';
 
-function Counter() {
-  const [number, setNumber] = useState(1);
+function Counter(props) {
+  const { number, setNumber, show } = props;
   return (
     <>
-      <div className="c-counter">
+      <div className={show ? 'c-counter w-50 mobile-counter' : 'c-counter'}>
         <button
           type="button"
           className="c-counter__btn"
